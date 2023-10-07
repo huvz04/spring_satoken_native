@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bridge.report.mapper.RoleMapper">
+
+    <insert id="insert">
+        INSERT INTO role (name,value,data_range)
+        VALUES (#{name},#{value},#{datarange})
+
+    </insert>
+    <select id="selectRoleValueByList" resultType="java.lang.String" >
+        select value from role
+            <where>
+                id in (
+                select role_id from role_user where user_id = #{id}
+                )
+            </where>
+
+    </select>
+
+</mapper>

@@ -1,0 +1,31 @@
+server:
+  port: 11480
+
+spring:
+
+  sql:
+    init:
+      enabled: true
+      username:
+      password:
+      ## 初始化自动SQL脚本
+      schema-locations: classpath*:schema.sql
+      mode: always
+      continue-on-error: true
+  ## 内部集成SQLite数据库，和mysql用法基本一致
+  datasource:
+    driver-class-name: org.sqlite.JDBC
+    url: jdbc:sqlite::resource:static/bridgeUser.sqlite
+    username:
+    password:
+## mybatis 配置
+mybatis:
+  mapper-locations: classpath:com/bridge/report/*.xml # 扫描mybatis的实现dao接口*.xml文件
+  ##type-aliases-package: com.bridge.inspection.entity #实体类取别名
+  ##configuration:
+    ## 下划线转驼峰配置
+  ##  map-underscore-to-camel-case: true
+## 显示dao 执⾏sql语句
+logging:
+  level:
+    com.ppl.springboot.dao: debug # 改成你的dao接口文件所在包路径可以打印出sql语句
